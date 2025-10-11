@@ -5,7 +5,7 @@ let highlighter: any = null
 export async function useHighlight(
   code: string,
   lang = 'js',
-  theme = 'github-dark'
+  theme = 'github-light'
 ) {
   if (!highlighter) {
     highlighter = await createHighlighter({

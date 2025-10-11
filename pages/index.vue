@@ -24,13 +24,38 @@
         <Icon name="ic:baseline-content-copy" class="text-xl" />
       </button>
     </div>
-    <a href="/docs/installation" class="bg-green-600 text-white rounded px-8 py-3">Get Started</a>
+    <!-- <a href="/docs/installation" class="bg-green-600 text-white rounded px-8 py-3">Get Started</a> -->
+    <div class="w-full flex flex-col justify-center items-center">
+      <div class="w-[500px] h-[300px] border border-gray-200">
+        <Signature
+          ref="signatureRef"
+          :hide-action-button="false"
+          responsive
+          :hide-input-file="true"
+          placeholder="draw your signature"
+        />
+      </div>
+      <button @click="downloadImage" class="bg-green-600 text-white px-5 py-2 rounded mt-3">Download</button>
+      </div>
   </div>
 </template>
 
 <script setup lang="ts">
 const canvas = ref<string>("<canvas>")
 const isCopied = ref<boolean>(false)
+import { Signature } from 'pearl-signature'
+import 'pearl-signature/dist/pearl-signature.css'
+
+
+type SignatureType = {
+  clearCanvas: () => void;
+  undo: () => void;
+  redo: () => void;
+  getBlob: () => Promise<Blob | null>;
+  applyImageToCanvas: (imageUrl: string) => Promise<void>;
+}
+
+const signatureRef = ref<SignatureType | null>(null)
 
 const copyCommand = async () => {
   try {
@@ -41,6 +66,29 @@ const copyCommand = async () => {
     }, 3000)
   } catch {
     alert('Copy failed')
+  }
+}
+
+
+const downloadImage = async () => {
+  const blob = await signatureRef.value?.getBlob()
+  if (blob) {
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'signature.png'
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+}
+const onChangeFile = async (e: Event) => {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  console.log(e)
+  if (file){
+    const imageUrl = URL.createObjectURL(file)
+    await signatureRef.value?.applyImageToCanvas(imageUrl)
+    URL.revokeObjectURL(imageUrl);
   }
 }
 </script>
