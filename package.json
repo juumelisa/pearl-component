@@ -15,7 +15,7 @@
     "@tailwindcss/vite": "^4.1.14",
     "better-sqlite3": "^12.4.1",
     "nuxt": "^3.19.2",
-    "pearl-signature": "^1.5.1",
+    "pearl-signature": "^1.5.3",
     "shiki": "^3.13.0",
     "tailwindcss": "^4.1.14",
     "vue": "^3.5.22",

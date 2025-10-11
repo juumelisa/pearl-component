@@ -41,9 +41,12 @@
 </template>
 
 <script setup lang="ts">
-import { Signature } from 'pearl-signature'
-import 'pearl-signature/dist/pearl-signature.css'
+import { Signature } from 'pearl-signature';
+import 'pearl-signature/dist/pearl-signature.css';
 
+useHead({
+  title: 'pearl signature'
+})
 
 type SignatureType = {
   clearCanvas: () => void;
