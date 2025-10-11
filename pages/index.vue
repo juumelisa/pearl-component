@@ -31,11 +31,11 @@
           ref="signatureRef"
           :hide-action-button="false"
           responsive
-          :hide-input-file="true"
+          :hide-input-file="false"
           placeholder="draw your signature"
         />
       </div>
-      <button @click="downloadImage" class="bg-green-600 text-white px-5 py-2 rounded mt-3">Download</button>
+      <button @click="downloadImage" class="bg-green-600 text-white px-5 py-2 rounded mt-3 cursor-pointer">Download</button>
       </div>
   </div>
 </template>
