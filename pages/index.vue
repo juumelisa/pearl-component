@@ -1,10 +1,11 @@
 <template>
-  <div class="w-full min-h-screen flex flex-col justify-center items-center gap-5">
+  <div class="w-full min-h-screen flex flex-col justify-center items-center gap-5 p-5 text-base md:text-sm">
     <h1 class="text-5xl lg:text-7xl font-semibold">Pearl Signature</h1>
     <div class="w-full max-w-lg text-center">
       <p>A lightweight Vue 3 component that provides a responsive {{ canvas }} for signatures.</p>
     </div>
-    <div
+    <button
+      @click="copyCommand"
       class="border rounded flex justify-center items-center p-3 gap-5"
       v-bind:class="{
         'border-green-600': isCopied,
@@ -17,16 +18,15 @@
         class="flex justify-center items-center">
         <Icon name="ic:baseline-check" class="text-green-600 text-xl" />
       </div>
-      <button
+      <div
         v-else
-        @click="copyCommand"
         class="cursor-pointer flex justify-center items-center">
         <Icon name="ic:baseline-content-copy" class="text-xl" />
-      </button>
-    </div>
+      </div>
+    </button>
     <!-- <a href="/docs/installation" class="bg-green-600 text-white rounded px-8 py-3">Get Started</a> -->
     <div class="w-full flex flex-col justify-center items-center">
-      <div class="w-[500px] h-[300px] border border-gray-200">
+      <div class="w-full max-w-3xl h-[300px] border border-gray-200">
         <Signature
           ref="signatureRef"
           :hide-action-button="false"
@@ -84,14 +84,14 @@ const downloadImage = async () => {
     URL.revokeObjectURL(url)
   }
 }
-const onChangeFile = async (e: Event) => {
-  const target = e.target as HTMLInputElement
-  const file = target.files?.[0]
-  console.log(e)
-  if (file){
-    const imageUrl = URL.createObjectURL(file)
-    await signatureRef.value?.applyImageToCanvas(imageUrl)
-    URL.revokeObjectURL(imageUrl);
-  }
-}
+// const onChangeFile = async (e: Event) => {
+//   const target = e.target as HTMLInputElement
+//   const file = target.files?.[0]
+//   console.log(e)
+//   if (file){
+//     const imageUrl = URL.createObjectURL(file)
+//     await signatureRef.value?.applyImageToCanvas(imageUrl)
+//     URL.revokeObjectURL(imageUrl);
+//   }
+// }
 </script>
