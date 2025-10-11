@@ -41,8 +41,6 @@
 </template>
 
 <script setup lang="ts">
-const canvas = ref<string>("<canvas>")
-const isCopied = ref<boolean>(false)
 import { Signature } from 'pearl-signature'
 import 'pearl-signature/dist/pearl-signature.css'
 
@@ -56,6 +54,8 @@ type SignatureType = {
 }
 
 const signatureRef = ref<SignatureType | null>(null)
+const canvas = ref<string>("<canvas>")
+const isCopied = ref<boolean>(false)
 
 const copyCommand = async () => {
   try {
